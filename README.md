@@ -35,6 +35,8 @@ and it supports [custom http headers](https://github.com/coursier/sbt-coursier/p
 
 Configure headers in the `<project-root>/build.sbt` or `$HOME/.sbt/1.0/global.sbt` for a global configuration:
 ```
+import lmcoursier.definitions.Authentication
+
 csrConfiguration := csrConfiguration.value
   .addRepositoryAuthentication("my-repo-id", Authentication("", "").withHeaders(Seq(("header-key","header-value"))))
 resolvers += ("my-repo-id" at "https://maven-repo-host/path")
