@@ -21,22 +21,24 @@ package org.jboss.pnc.sbt.plugins
 import org.apache.ivy.Ivy
 import org.apache.ivy.util.url.{BasicURLHandler, IvyAuthenticator}
 import org.apache.ivy.util.{CopyProgressListener, FileUtil, Message}
+import sbt.internal.librarymanagement.ivyint.ErrorMessageAuthenticator
 import sbt.{File, URL}
 
 import java.io.{ByteArrayOutputStream, FileInputStream, IOException, InputStream}
 import java.net.{HttpURLConnection, URLConnection}
 import java.util
 
-class WithHeadersURLHandler(headers: java.util.Map[String,String]) extends BasicURLHandler() {
+class WithHeadersURLHandler(headers: util.Map[String, String]) extends BasicURLHandler() {
 
   private val BUFFER_SIZE = 64 * 1024
   private val ERROR_BODY_TRUNCATE_LEN = 512
+
   override def upload(source: File, dest: URL, l: CopyProgressListener): Unit = {
 
     if (!("http" == dest.getProtocol) && !("https" == dest.getProtocol)) throw new UnsupportedOperationException("URL repository only support HTTP PUT at the moment")
 
-    // Install the IvyAuthenticator// Install the IvyAuthenticator
     IvyAuthenticator.install()
+    ErrorMessageAuthenticator.install()
 
     var conn: HttpURLConnection = null
     try {
@@ -73,23 +75,23 @@ class WithHeadersURLHandler(headers: java.util.Map[String,String]) extends Basic
     } finally disconnect(conn)
   }
 
-  @throws[IOException]
+
   private def getHeadersAsDebugString(headers: util.Map[String, util.List[String]]): String = {
     val builder: StringBuilder = new StringBuilder("")
     if (headers != null) {
-      import scala.collection.JavaConversions.*
-      for (header <- headers.entrySet) {
-        val key: String = header.getKey
+      headers.entrySet().forEach(entry => {
+        val key: String = entry.getKey
         if (key != null) {
-          builder.append(header.getKey)
+          builder.append(key)
           builder.append(": ")
         }
-        builder.append(String.join("\n    ", header.getValue))
+        builder.append(String.join("\n    ", entry.getValue))
         builder.append("\n")
-      }
+      })
     }
     builder.toString
   }
+
   /**
    * Extract the charset from the Content-Type header string, or default to ISO-8859-1 as per
    * rfc2616-sec3.html#sec3.7.1 .
@@ -133,6 +135,7 @@ class WithHeadersURLHandler(headers: java.util.Map[String,String]) extends Basic
       case _: IOException =>
     }
   }
+
   private def disconnect(con: URLConnection): Unit = {
     con match {
       case connection: HttpURLConnection =>
