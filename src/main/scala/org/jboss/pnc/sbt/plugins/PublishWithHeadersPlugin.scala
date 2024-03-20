@@ -18,7 +18,6 @@
 
 package org.jboss.pnc.sbt.plugins
 
-import okhttp3.Headers
 import sbt.Keys._
 import sbt.{Def, _}
 import org.apache.ivy.util.url._
@@ -35,9 +34,9 @@ object PublishWithHeadersPlugin extends AutoPlugin with PublishWithHeadersKeys {
       log.info(s"Updating urlHandlerDispatcher to use PublishWithHeadersPlugin")
       val urlHandlerDispatcher = new URLHandlerDispatcher {
         super.setDownloader("http", new WithHeadersURLHandler(
-          Headers.of(Strings.toMap(headers.value))))
+          Strings.toMap(headers.value)))
         super.setDownloader("https", new WithHeadersURLHandler(
-          Headers.of(Strings.toMap(headers.value))))
+          Strings.toMap(headers.value)))
         override def setDownloader(protocol: String, downloader: URLHandler): Unit = {}
       }
       URLHandlerRegistry.setDefault(urlHandlerDispatcher)
