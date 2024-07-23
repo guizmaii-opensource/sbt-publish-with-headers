@@ -1,7 +1,12 @@
-sbtPlugin := true
+organization  := "com.guizmaii"
+name          := "publish-with-headers"
+homepage      := Some(url("https://github.com/guizmaii-opensource/sbt-publish-with-headers"))
+licenses      := Seq("Apache 2.0" -> url("https://opensource.org/license/apache-2.0"))
+versionScheme := Some("semver-spec")
 
-name := "publish-with-headers"
-organization := "org.jboss.pnc.sbt.plugins"
-version := "0.0.3-SNAPSHOT"
+Global / onChangedBuildSource := ReloadOnSourceChanges
 
-publishMavenStyle := true
+sbtPlugin    := true
+scalaVersion := "2.12.19"
+
+libraryDependencies += "dev.zio" %% "zio-test" % "2.1.6" % Test
