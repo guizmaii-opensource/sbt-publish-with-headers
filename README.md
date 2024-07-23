@@ -18,7 +18,7 @@ It's mostly based on the: https://github.com/k8ty-app/sbt-publish and https://gi
 Enable the plugin in the `<project-root>/project/plugins.sbt` or `$HOME/.sbt/1.0/plugins/build.sbt` for a global configuration:
 
 ```
-addSbtPlugin("com.guizmaii" % "publish-with-headers" % "0.0.1")
+addSbtPlugin("com.guizmaii" % "sbt-publish-with-headers" % "0.0.1")
 ```
 
 ## Configuration
