@@ -1,5 +1,5 @@
 organization  := "com.guizmaii"
-name          := "publish-with-headers"
+name          := "sbt-publish-with-headers"
 homepage      := Some(url("https://github.com/guizmaii-opensource/sbt-publish-with-headers"))
 licenses      := Seq("Apache 2.0" -> url("https://opensource.org/license/apache-2.0"))
 versionScheme := Some("semver-spec")
