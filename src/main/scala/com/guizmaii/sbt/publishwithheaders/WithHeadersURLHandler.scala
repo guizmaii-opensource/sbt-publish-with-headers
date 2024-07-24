@@ -39,7 +39,7 @@ private[publishwithheaders] final class WithHeadersURLHandler(
               )
           )
 
-      logDebug(s"Request: $request")
+      logDebug(s"Request: ${request.toCurl(Set("Authorization"))}")
 
       val response = client.send(request)
 
