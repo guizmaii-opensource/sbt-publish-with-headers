@@ -27,7 +27,12 @@ developers    :=
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
+scalafmtCheck     := true
+scalafmtSbtCheck  := true
+scalafmtOnCompile := true
+
 sbtPlugin    := true
 scalaVersion := "2.12.19"
 
-libraryDependencies += "dev.zio" %% "zio-test" % "2.1.6" % Test
+libraryDependencies += "com.softwaremill.sttp.client3" %% "core"     % "3.9.7"
+libraryDependencies += "dev.zio"                       %% "zio-test" % "2.1.6" % Test
