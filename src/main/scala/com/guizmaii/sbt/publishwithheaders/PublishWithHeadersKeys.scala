@@ -4,6 +4,9 @@ import sbt.*
 
 trait PublishWithHeadersKeys {
 
+  lazy val publishToWithHeaders: SettingKey[Option[MavenRepository]] =
+    settingKey[Option[MavenRepository]]("""Resolver to publish to with headers.""")
+
   lazy val headersToPublishWith =
     settingKey[Seq[(String, String)]]("""Headers definition. Example: Seq("Authorization" -> s"Bearer $token")""")
 
