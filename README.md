@@ -6,29 +6,27 @@ Publish with headers SBT plugin
 This project is a fork of https://github.com/project-ncl/sbt-publish-with-headers
 
 Why forking?     
-Because the initial plugin doesn't seem to be publish to Maven Central
+1. The initial plugin doesn't seem to be published to Maven Central
+2. We brought fixes, improvements and changed how the plugin works.
 
 # Documentation
 
-This is an SBT plugin to add http headers when publishing Maven artifacts.
-
-It's mostly based on the: https://github.com/k8ty-app/sbt-publish and https://github.com/sbt/sbt/issues/4382#issuecomment-469734888
+This plugin allows you to publish artifacts to a Maven repository with custom HTTP headers.     
+It also automatically configure your sbt project so that it can fetch dependencies from a Maven repository with custom HTTP headers.
 
 ## Installation
-Enable the plugin in the `<project-root>/project/plugins.sbt` or `$HOME/.sbt/1.0/plugins/build.sbt` for a global configuration:
 
+Enable the plugin in your `project/plugins.sbt` file:
 ```
-addSbtPlugin("com.guizmaii" % "sbt-publish-with-headers" % "0.0.4")
+addSbtPlugin("com.guizmaii" % "sbt-publish-with-headers" % "0.0.5")
 ```
 
 ## Configuration
 
-Configure the plugin in the `build.sbt` (or `$HOME/.sbt/1.0/global.sbt` for a global configuration):
+Configure the plugin in your `build.sbt` file:
 ```sbt
+publishToWithHeaders := Some("my-repo-requiring-custom-headers" at "https://maven-repo-host/path")
 headersToPublishWith := Seq("header-key" -> "header-value", "header-key-2" -> "header-value-2")
-publishTo := Some("MavenRepo" at s"https://maven-repo-host/path")
-//in case you are still using an endpoit without TLS
-publishTo := Some(("MavenRepo" at s"http://maven-repo-host/path").withAllowInsecureProtocol(true))
 ```
 
 ## Execution
@@ -36,18 +34,7 @@ To publish to a Maven repository with http headers run:
 
 `sbt publishWithHeaders`
 
-## Just in case
-you need http headers for fetching the dependencies from the Maven repository.
+## Fetching dependencies from your Maven repository with custom HTTP headers
 
-[Coursier](https://get-coursier.io/docs/sbt-coursier) is used as a default dependency resolver since SBT 1.3.x
-and it supports [custom http headers](https://github.com/coursier/sbt-coursier/pull/218). 
-
-Configure headers in the `build.sbt` (or `$HOME/.sbt/1.0/global.sbt` for a global configuration):
-```sbt
-import lmcoursier.definitions.Authentication
-import lmcoursier.syntax.CoursierConfigurationOp
-
-lazy val myRepo = ("my-repo-id" at "https://maven-repo-host/path")
-csrConfiguration ~= _.addRepositoryAuthentication(myRepo.name, Authentication("", "").withHeaders(Seq("header-key" -> "header-value")))
-resolvers += myRepo
-```
+There's nothing for you to do.    
+The plugin will automatically configure your sbt project so that it can fetch dependencies from your Maven repository requiring custom HTTP headers.
