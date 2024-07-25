@@ -1,4 +1,4 @@
-Publish with headers SBT plugin
+Publish libs and fetch dependencies with custom headers SBT plugin
 ===============================
 
 # This is not a fork
