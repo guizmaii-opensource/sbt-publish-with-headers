@@ -1,4 +1,4 @@
-Publish libs and fetch dependencies with custom headers SBT plugin
+Publish libraries and fetch dependencies from Maven repositories requiring with custom headers
 ===============================
 
 # This is not a fork
