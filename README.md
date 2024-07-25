@@ -1,4 +1,4 @@
-Publish libraries and fetch dependencies from Maven repositories requiring with custom headers
+Publish libraries and fetch dependencies from Maven repositories requiring custom headers
 ===============================
 
 # This is not a fork
