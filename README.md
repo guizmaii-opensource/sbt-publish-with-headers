@@ -17,7 +17,7 @@ It also automatically configure your sbt project so that it can fetch dependenci
 ## Installation
 
 Enable the plugin in your `project/plugins.sbt` file:
-```
+```sbt
 addSbtPlugin("com.guizmaii" % "sbt-publish-with-headers" % "0.0.5")
 ```
 
