@@ -32,7 +32,7 @@ scalafmtSbtCheck  := true
 scalafmtOnCompile := true
 
 sbtPlugin    := true
-scalaVersion := "2.12.20"
+scalaVersion := "2.13.16"
 
 libraryDependencies += "com.softwaremill.sttp.client3" %% "core"     % "3.10.2"
 libraryDependencies += "dev.zio"                       %% "zio-test" % "2.1.14" % Test
