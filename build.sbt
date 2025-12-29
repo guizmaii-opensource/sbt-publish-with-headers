@@ -35,4 +35,4 @@ sbtPlugin    := true
 scalaVersion := "2.12.21"
 
 libraryDependencies += "com.softwaremill.sttp.client3" %% "core"     % "3.11.0"
-libraryDependencies += "dev.zio"                       %% "zio-test" % "2.1.23" % Test
+libraryDependencies += "dev.zio"                       %% "zio-test" % "2.1.24" % Test
